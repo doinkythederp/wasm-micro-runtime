@@ -5,19 +5,26 @@ cmake_minimum_required (VERSION 3.0)
 
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
 
+if(ESP_PLATFORM)
+  include (${COMPONENT_DIR}/build-scripts/esp-idf/wamr/CMakeLists.txt)
+  return()
+endif()
+
 project (iwasm LANGUAGES C)
 
-set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD 17)
 
 set (CMAKE_VERBOSE_MAKEFILE OFF)
 
-set (WAMR_BUILD_PLATFORM "vexos")
+if (NOT DEFINED WAMR_BUILD_PLATFORM)
+  string (TOLOWER ${CMAKE_HOST_SYSTEM_NAME} WAMR_BUILD_PLATFORM)
+endif ()
 
 # Reset default linker flags
 set (CMAKE_SHARED_LIBRARY_LINK_C_FLAGS "")
 set (CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS "")
 
-set (CMAKE_C_STANDARD 23)
+set (CMAKE_C_STANDARD 99)
 
 # Set WAMR_BUILD_TARGET, currently values supported:
 # "X86_64", "AMD_64", "X86_32", "AARCH64[sub]", "ARM[sub]", "THUMB[sub]",
