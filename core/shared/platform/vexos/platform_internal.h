@@ -22,33 +22,24 @@
 #define BH_PLATFORM_VEXOS
 #endif
 
-//#define BH_APPLET_PRESERVED_STACK_SIZE (2 * BH_KB)
+#define os_printf printf
+#define os_vprintf vprintf
 
-/* Default thread priority */
-#define BH_THREAD_DEFAULT_PRIORITY 7
+// Stubs
 
 typedef void *korp_thread;
 typedef void *korp_tid;
 typedef void *korp_mutex;
 typedef unsigned int korp_sem;
-
-/* korp_rwlock is used in platform_api_extension.h,
-   we just define the type to make the compiler happy */
 typedef struct {
     int dummy;
 } korp_rwlock;
-
-/* typedef sema_t korp_sem; */
-
 struct os_thread_wait_node;
 typedef struct os_thread_wait_node *os_thread_wait_list;
 typedef struct korp_cond {
     korp_mutex wait_list_lock;
     os_thread_wait_list thread_wait_list;
 } korp_cond;
-
-#define os_printf printf
-#define os_vprintf vprintf
 
 /* The below types are used in platform_api_extension.h,
    we just define them to make the compiler happy */
@@ -86,8 +77,6 @@ os_get_invalid_handle(void)
     return -1;
 }
 
-/* There is no MMU in RIOT so the function return 1024 to make the compiler
-   happy */
 static inline int
 os_getpagesize()
 {
