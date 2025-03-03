@@ -4,7 +4,7 @@
 # Variables used:
 # - GCC_ARM_TOOLCHAIN: should point to a ARM Embedded Toolchain install containing `bin/`, `lib/`, `arm-none-eabi/`, etc.
 
-cmake_minimum_required(VERSION 3.31.6)
+cmake_minimum_required(VERSION 3.30.5)
 
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_PROCESSOR ARM)
