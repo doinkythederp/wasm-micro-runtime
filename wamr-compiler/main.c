@@ -207,6 +207,7 @@ print_help()
 #endif
     printf("  --mllvm=<option>          Add the LLVM command line option\n");
     printf("  --enable-shared-heap      Enable shared heap feature\n");
+    printf("  --force-baremetal         Force baremetal compilation\n");
     printf("  -v=n                      Set log verbose level (0 to 5, default is 2), larger with more log\n");
     printf("  --version                 Show version information\n");
     printf("Examples: wamrc -o test.aot test.wasm\n");
@@ -656,6 +657,9 @@ main(int argc, char *argv[])
             wasm_runtime_get_version(&major, &minor, &patch);
             printf("wamrc %u.%u.%u\n", major, minor, patch);
             return 0;
+        }
+        else if (!strcmp(argv[0], "--force-baremetal")) {
+            option.force_baremetal = true;
         }
         else
             PRINT_HELP_AND_EXIT();

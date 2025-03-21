@@ -2887,7 +2887,7 @@ aot_create_comp_context(const AOTCompData *comp_data, aot_comp_option_t option)
                     vendor_sys = "-pc-windows-";
             }
             else {
-                if (is_baremetal_target(arch, cpu, abi))
+                if (is_baremetal_target(arch, cpu, abi) || option->force_baremetal)
                     vendor_sys = "-unknown-none-";
                 else
                     vendor_sys = "-pc-linux-";
@@ -2926,7 +2926,7 @@ aot_create_comp_context(const AOTCompData *comp_data, aot_comp_option_t option)
                 if (!abi)
                     abi = "msvc";
             }
-            else if (is_baremetal_target(arch, cpu, abi)) {
+            else if (is_baremetal_target(arch, cpu, abi) || option->force_baremetal) {
                 vendor_sys = "-unknown-none-";
                 if (!abi)
                     abi = "gnu";

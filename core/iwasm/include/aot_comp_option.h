@@ -90,6 +90,7 @@ typedef struct AOTCompOption {
     const char *stack_usage_file;
     const char *llvm_passes;
     const char *builtin_intrinsics;
+    bool force_baremetal;
 } AOTCompOption, *aot_comp_option_t;
 
 #ifdef __cplusplus
